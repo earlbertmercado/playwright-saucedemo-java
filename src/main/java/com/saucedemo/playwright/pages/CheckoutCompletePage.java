@@ -1,0 +1,47 @@
+package com.saucedemo.playwright.pages;
+
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
+import com.saucedemo.playwright.base.BasePage;
+import com.saucedemo.playwright.constants.CheckoutCompletePageLocators;
+import com.saucedemo.playwright.constants.HeaderLocators;
+
+public class CheckoutCompletePage extends BasePage {
+
+    private final Locator pageTitle;
+    private final Locator thankYouHeader;
+    private final Locator thankYouMessage;
+    private final Locator backHomeButton;
+
+    public CheckoutCompletePage(Page page) {
+        super(page);
+        pageTitle       = locator(HeaderLocators.PAGE_TITLE);
+        thankYouHeader  = locator(CheckoutCompletePageLocators.THANK_YOU_HEADER);
+        thankYouMessage = locator(CheckoutCompletePageLocators.THANK_YOU_MESSAGE);
+        backHomeButton  = locator(CheckoutCompletePageLocators.BACK_HOME_BUTTON);
+    }
+
+    // ------------------ Getter Methods ------------------
+    public String getPageTitle() {
+        return pageTitle.innerText();
+    }
+
+    // ------------------ Visibility Methods ------------------
+    public boolean isThankYouHeaderVisible() {
+        return thankYouHeader.isVisible();
+    }
+
+    public boolean isThankYouMessageVisible() {
+        return thankYouMessage.isVisible();
+    }
+
+    public boolean isBackHomeButtonVisible() {
+        return backHomeButton.isVisible();
+    }
+
+    // ------------------ Action Methods ------------------
+    public InventoryPage clickBackHomeButton() {
+        backHomeButton.click();
+        return new InventoryPage(page);
+    }
+}
