@@ -1,4 +1,4 @@
-package com.saucedemo.playwright;
+package com.saucedemo.playwright.tests;
 
 import com.saucedemo.playwright.base.BaseTest;
 import com.saucedemo.playwright.constants.AppConstants;
@@ -16,23 +16,18 @@ public class CheckoutStepTwoTest extends BaseTest {
     public void testCheckoutStepTwoPageLoad() {
         int FIRST_ITEM = 0;
 
-        // Externalize test data later
-        String firstName = "John";
-        String lastName = "Doe";
-        String postalCode = "12345";
-
         SoftAssertions softly = new SoftAssertions();
         AppStateUtils appStateUtils = new AppStateUtils(page);
 
         CheckoutStepTwoPage checkoutStepTwoPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .addItemToCartByIndex(FIRST_ITEM)
                 .clickShoppingCart()
                 .clickCheckout()
-                .enterFirstName(firstName)
-                .enterLastName(lastName)
-                .enterPostalCode(postalCode)
+                .enterFirstName(user.getFirstName())
+                .enterLastName(user.getLastName())
+                .enterPostalCode(user.getPostalCode())
                 .clickContinueButton();
 
         assertThat(page.url())
@@ -77,25 +72,20 @@ public class CheckoutStepTwoTest extends BaseTest {
         int SECOND_ITEM = 1;
         int THIRD_ITEM = 2;
 
-        // Externalize test data later
-        String firstName = "John";
-        String lastName = "Doe";
-        String postalCode = "12345";
-
         SoftAssertions softly = new SoftAssertions();
         AppStateUtils appStateUtils = new AppStateUtils(page);
 
         CheckoutStepTwoPage checkoutStepTwoPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .addItemToCartByIndex(FIRST_ITEM)
                 .addItemToCartByIndex(SECOND_ITEM)
                 .addItemToCartByIndex(THIRD_ITEM)
                 .clickShoppingCart()
                 .clickCheckout()
-                .enterFirstName(firstName)
-                .enterLastName(lastName)
-                .enterPostalCode(postalCode)
+                .enterFirstName(user.getFirstName())
+                .enterLastName(user.getLastName())
+                .enterPostalCode(user.getPostalCode())
                 .clickContinueButton();
 
         Double expectedTotalBeforeTax = checkoutStepTwoPage.getTotalItemPrices();
@@ -121,22 +111,17 @@ public class CheckoutStepTwoTest extends BaseTest {
     public void testCheckoutStepTwoCancelButton() {
         int FIRST_ITEM = 0;
 
-        // Externalize test data later
-        String firstName = "John";
-        String lastName = "Doe";
-        String postalCode = "12345";
-
         AppStateUtils appStateUtils = new AppStateUtils(page);
 
         CheckoutStepTwoPage checkoutStepTwoPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .addItemToCartByIndex(FIRST_ITEM)
                 .clickShoppingCart()
                 .clickCheckout()
-                .enterFirstName(firstName)
-                .enterLastName(lastName)
-                .enterPostalCode(postalCode)
+                .enterFirstName(user.getFirstName())
+                .enterLastName(user.getLastName())
+                .enterPostalCode(user.getPostalCode())
                 .clickContinueButton();
 
         checkoutStepTwoPage.clickCancelButton();

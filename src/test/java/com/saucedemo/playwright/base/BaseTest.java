@@ -2,12 +2,15 @@ package com.saucedemo.playwright.base;
 
 import com.saucedemo.playwright.browser.BrowserManager;
 import com.saucedemo.playwright.utils.InitializeProperties;
+import com.saucedemo.playwright.dataprovider.TestDataLoader;
+import com.saucedemo.playwright.dataprovider.TestDataUsers;
 import com.microsoft.playwright.Page;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 
 import java.util.Properties;
 
@@ -18,6 +21,7 @@ public abstract class BaseTest {
     protected BrowserManager browserManager;
     protected Page page;
     protected Properties properties;
+    protected TestDataUsers user;
 
     //  Initializes BrowserManager, loads properties, and launches the browser before any tests.
     @BeforeClass
@@ -32,6 +36,21 @@ public abstract class BaseTest {
         }
 
         logger.info("Browser launched successfully.");
+    }
+
+    // Loads the user test data before each test method
+    @BeforeMethod
+    public void loadTestUser() {
+        String userKey = System.getProperty("user", "standard_user");
+        user = TestDataLoader.getUser(userKey);
+        if (user == null) {
+            throw new RuntimeException("Test user not found: " + userKey);
+        }
+        logger.info("Loaded test user: {}", userKey);
+    }
+
+    protected TestDataUsers getTestUser() {
+        return user;
     }
 
     // Logs the current URL after each test method.

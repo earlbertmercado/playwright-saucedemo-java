@@ -1,4 +1,4 @@
-package com.saucedemo.playwright;
+package com.saucedemo.playwright.tests;
 
 import com.saucedemo.playwright.base.BaseTest;
 import com.saucedemo.playwright.constants.AppConstants;
@@ -18,11 +18,12 @@ public class ItemDetailTest extends BaseTest {
     @Test
     public void testItemDetailPageLoad() {
         int FIRST_ITEM = 0;
+
         SoftAssertions softly = new SoftAssertions();
 
         ItemDetailPage itemDetailPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .clickItemNameByIndex(FIRST_ITEM);
 
         assertThat(itemDetailPage.getPage().url())
@@ -55,17 +56,19 @@ public class ItemDetailTest extends BaseTest {
     @Test
     public void testAddAndRemoveItemToCart() {
         int FIRST_ITEM = 0;
+        String EXPECTED_CART_BADGE_DISPLAYED_NUMBER = "1";
+
         SoftAssertions softly = new SoftAssertions();
 
         ItemDetailPage itemDetailPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .clickItemNameByIndex(FIRST_ITEM)
                 .clickAddToCartButton();
 
         softly.assertThat(page.locator(HeaderLocators.SHOPPING_CART_BADGE).innerText())
                 .as("Shopping cart badge shows 1 item")
-                .isEqualTo("1");
+                .isEqualTo(EXPECTED_CART_BADGE_DISPLAYED_NUMBER);
 
         softly.assertThat(page.locator(ItemDetailPageLocators.REMOVE_BUTTON).isVisible())
                 .as("Remove button is visible after adding to cart")
@@ -90,7 +93,7 @@ public class ItemDetailTest extends BaseTest {
 
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .clickItemNameByIndex(FIRST_ITEM)
                 .clickBackToProducts();
 
@@ -102,11 +105,13 @@ public class ItemDetailTest extends BaseTest {
     @Test
     public void testSpecificItemDetailPage() {
         int FLEE_JACKET_ID = 5;
+        double FLEE_JACKET_PRICE = 49.99;
+
         SoftAssertions softly = new SoftAssertions();
 
         ItemDetailPage itemDetailPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .clickSpecificItem(InventoryPageLocators.FLEE_JACKET);
 
         assertThat(page.url())
@@ -119,7 +124,7 @@ public class ItemDetailTest extends BaseTest {
 
         softly.assertThat(itemDetailPage.getItemPrice())
                 .as("Item price for Sauce Labs Fleece Jacket")
-                .isEqualTo(49.99);
+                .isEqualTo(FLEE_JACKET_PRICE);
 
         softly.assertThat(itemDetailPage.getItemDescription())
                 .as("Item description for Sauce Labs Fleece Jacket")
@@ -138,7 +143,7 @@ public class ItemDetailTest extends BaseTest {
 
         ItemDetailPage itemDetailPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .clickItemNameByIndex(FIRST_ITEM);
 
         assertThat(itemDetailPage.getItemPrice())

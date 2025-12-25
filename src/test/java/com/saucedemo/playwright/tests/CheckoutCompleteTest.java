@@ -1,4 +1,4 @@
-package com.saucedemo.playwright;
+package com.saucedemo.playwright.tests;
 
 import com.saucedemo.playwright.base.BaseTest;
 import com.saucedemo.playwright.constants.AppConstants;
@@ -17,23 +17,18 @@ public class CheckoutCompleteTest extends BaseTest {
     public void testCheckoutCompletePageLoad() {
         int FIRST_ITEM = 0;
 
-        // Externalize test data later
-        String firstName = "John";
-        String lastName = "Doe";
-        String postalCode = "12345";
-
         SoftAssertions softly = new SoftAssertions();
         AppStateUtils appStateUtils = new AppStateUtils(page);
 
         CheckoutCompletePage checkoutCompletePage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .addItemToCartByIndex(FIRST_ITEM)
                 .clickShoppingCart()
                 .clickCheckout()
-                .enterFirstName(firstName)
-                .enterLastName(lastName)
-                .enterPostalCode(postalCode)
+                .enterFirstName(user.getFirstName())
+                .enterLastName(user.getLastName())
+                .enterPostalCode(user.getPostalCode())
                 .clickContinueButton()
                 .clickFinishButton();
 
@@ -65,22 +60,17 @@ public class CheckoutCompleteTest extends BaseTest {
     public void testBackHomeButton() {
         int FIRST_ITEM = 0;
 
-        // Externalize test data later
-        String firstName = "John";
-        String lastName = "Doe";
-        String postalCode = "12345";
-
         AppStateUtils appStateUtils = new AppStateUtils(page);
 
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .addItemToCartByIndex(FIRST_ITEM)
                 .clickShoppingCart()
                 .clickCheckout()
-                .enterFirstName(firstName)
-                .enterLastName(lastName)
-                .enterPostalCode(postalCode)
+                .enterFirstName(user.getFirstName())
+                .enterLastName(user.getLastName())
+                .enterPostalCode(user.getPostalCode())
                 .clickContinueButton()
                 .clickFinishButton()
                 .clickBackHomeButton();

@@ -1,4 +1,4 @@
-package com.saucedemo.playwright;
+package com.saucedemo.playwright.tests;
 
 import com.saucedemo.playwright.base.BaseTest;
 import com.saucedemo.playwright.constants.AppConstants;
@@ -43,8 +43,8 @@ public class LoginTest extends BaseTest {
 
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
-                .enterUsername("standard_user")
-                .enterPassword("secret_sauce")
+                .enterUsername(user.getUsername())
+                .enterPassword(user.getPassword())
                 .clickLoginButton();
 
         assertThat(inventoryPage.getPage().url())

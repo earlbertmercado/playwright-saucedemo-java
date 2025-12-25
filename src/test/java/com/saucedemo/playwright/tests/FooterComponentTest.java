@@ -1,4 +1,4 @@
-package com.saucedemo.playwright;
+package com.saucedemo.playwright.tests;
 
 import com.microsoft.playwright.Page;
 import com.saucedemo.playwright.base.BaseTest;
@@ -21,7 +21,7 @@ public class FooterComponentTest extends BaseTest {
 
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce");
+                .login(user.getUsername(), user.getPassword());
 
         softly.assertThat(footer.isTwitterLinkVisible())
                 .as("Twitter link visibility")
@@ -56,7 +56,7 @@ public class FooterComponentTest extends BaseTest {
 
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce");
+                .login(user.getUsername(), user.getPassword());
 
         // Validate Twitter link
         Page twitterTab = page.waitForPopup(footer::clickTwitterLink);

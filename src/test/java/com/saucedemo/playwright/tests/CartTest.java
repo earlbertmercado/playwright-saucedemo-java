@@ -1,4 +1,4 @@
-package com.saucedemo.playwright;
+package com.saucedemo.playwright.tests;
 
 import com.saucedemo.playwright.base.BaseTest;
 import com.saucedemo.playwright.constants.AppConstants;
@@ -23,7 +23,7 @@ public class CartTest extends BaseTest {
 
         CartPage cartPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .addItemToCartByIndex(FIRST_ITEM)
                 .clickShoppingCart();
 
@@ -64,7 +64,7 @@ public class CartTest extends BaseTest {
 
         CartPage cartPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .addItemToCartByIndex(FIRST_ITEM)
                 .clickShoppingCart();
 
@@ -92,7 +92,7 @@ public class CartTest extends BaseTest {
 
         CartPage cartPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .addItemToCartByIndex(FIRST_ITEM)
                 .addItemToCartByIndex(SECOND_ITEM)
                 .addItemToCartByIndex(THIRD_ITEM)
@@ -119,7 +119,7 @@ public class CartTest extends BaseTest {
 
         CartPage cartPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .addItemToCartByIndex(FIRST_ITEM)
                 .clickShoppingCart();
 
@@ -146,7 +146,7 @@ public class CartTest extends BaseTest {
 
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .addItemToCartByIndex(FIRST_ITEM)
                 .clickShoppingCart()
                 .clickContinueShopping();
@@ -171,7 +171,7 @@ public class CartTest extends BaseTest {
 
         CartPage cartPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .clickShoppingCart();
 
         softly.assertThat(cartPage.getCartItemCount())

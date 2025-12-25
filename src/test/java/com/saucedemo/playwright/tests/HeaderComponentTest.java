@@ -1,4 +1,4 @@
-package com.saucedemo.playwright;
+package com.saucedemo.playwright.tests;
 
 import com.saucedemo.playwright.base.BaseTest;
 import com.saucedemo.playwright.constants.AppConstants;
@@ -26,7 +26,7 @@ public class HeaderComponentTest extends BaseTest {
 
         ItemDetailPage itemDetailPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .clickItemNameByIndex(FIRST_ITEM);
 
         header.clickAllItemsLink();
@@ -50,7 +50,7 @@ public class HeaderComponentTest extends BaseTest {
 
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce");
+                .login(user.getUsername(), user.getPassword());
 
         header.clickAboutLink();
 
@@ -68,7 +68,7 @@ public class HeaderComponentTest extends BaseTest {
 
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce");
+                .login(user.getUsername(), user.getPassword());
 
         LoginPage loginPage = header.clickLogoutLink();
 
@@ -91,7 +91,7 @@ public class HeaderComponentTest extends BaseTest {
 
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .addItemToCartByIndex(FIRST_ITEM);
 
         softly.assertThat(header.isShoppingCartBadgeVisible())
@@ -127,7 +127,7 @@ public class HeaderComponentTest extends BaseTest {
 
         CartPage cartPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .addItemToCartByIndex(FIRST_ITEM)
                 .addItemToCartByIndex(SECOND_ITEM)
                 .addItemToCartByIndex(THIRD_ITEM)

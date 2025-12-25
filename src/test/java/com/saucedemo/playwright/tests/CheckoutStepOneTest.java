@@ -1,4 +1,4 @@
-package com.saucedemo.playwright;
+package com.saucedemo.playwright.tests;
 
 import com.saucedemo.playwright.base.BaseTest;
 import com.saucedemo.playwright.constants.AppConstants;
@@ -23,7 +23,7 @@ public class CheckoutStepOneTest extends BaseTest {
 
         CheckoutStepOnePage checkoutStepOnePage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .addItemToCartByIndex(FIRST_ITEM)
                 .clickShoppingCart()
                 .clickCheckout();
@@ -73,13 +73,13 @@ public class CheckoutStepOneTest extends BaseTest {
 
         CheckoutStepTwoPage checkoutStepTwoPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .addItemToCartByIndex(FIRST_ITEM)
                 .clickShoppingCart()
                 .clickCheckout()
-                .enterFirstName(firstName)
-                .enterLastName(lastName)
-                .enterPostalCode(postalCode)
+                .enterFirstName(user.getFirstName())
+                .enterLastName(user.getLastName())
+                .enterPostalCode(user.getPostalCode())
                 .clickContinueButton();
 
         // TODO: Add assertions for Checkout Step Two page
@@ -89,21 +89,18 @@ public class CheckoutStepOneTest extends BaseTest {
     @Test
     public void testCheckoutStepOneWithEmptyFirstName() {
         int FIRST_ITEM = 0;
-
-        String lastName = "Doe";
-        String postalCode = "12345";
-        String expectedErrorMessage = "Error: First Name is required";
+        String EXPECTED_ERROR_MESSAGE = "Error: First Name is required";
 
         AppStateUtils appStateUtils = new AppStateUtils(page);
 
         new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .addItemToCartByIndex(FIRST_ITEM)
                 .clickShoppingCart()
                 .clickCheckout()
-                .enterLastName(lastName)
-                .enterPostalCode(postalCode)
+                .enterLastName(user.getLastName())
+                .enterPostalCode(user.getPostalCode())
                 .clickContinueButton();
 
         String actualErrorMessage = page
@@ -113,7 +110,7 @@ public class CheckoutStepOneTest extends BaseTest {
 
         assertThat(actualErrorMessage)
                 .as("Error message for empty First Name")
-                .isEqualTo(expectedErrorMessage);
+                .isEqualTo(EXPECTED_ERROR_MESSAGE);
 
         appStateUtils.resetStateAndLogout();
     }
@@ -121,21 +118,18 @@ public class CheckoutStepOneTest extends BaseTest {
     @Test
     public void testCheckoutStepOneWithEmptyLastName() {
         int FIRST_ITEM = 0;
-
-        String firstName = "John";
-        String postalCode = "12345";
-        String expectedErrorMessage = "Error: Last Name is required";
+        String EXPECTED_ERROR_MESSAGE = "Error: Last Name is required";
 
         AppStateUtils appStateUtils = new AppStateUtils(page);
 
         new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .addItemToCartByIndex(FIRST_ITEM)
                 .clickShoppingCart()
                 .clickCheckout()
-                .enterFirstName(firstName)
-                .enterPostalCode(postalCode)
+                .enterFirstName(user.getFirstName())
+                .enterPostalCode(user.getPostalCode())
                 .clickContinueButton();
 
         String actualErrorMessage = page
@@ -145,7 +139,7 @@ public class CheckoutStepOneTest extends BaseTest {
 
         assertThat(actualErrorMessage)
                 .as("Error message for empty Last Name")
-                .isEqualTo(expectedErrorMessage);
+                .isEqualTo(EXPECTED_ERROR_MESSAGE);
 
         appStateUtils.resetStateAndLogout();
     }
@@ -153,21 +147,18 @@ public class CheckoutStepOneTest extends BaseTest {
     @Test
     public void testCheckoutStepOneWithEmptyPostalCode() {
         int FIRST_ITEM = 0;
-
-        String firstName = "John";
-        String lastName = "Doe";
-        String expectedErrorMessage = "Error: Postal Code is required";
+        String EXPECTED_ERROR_MESSAGE = "Error: Postal Code is required";
 
         AppStateUtils appStateUtils = new AppStateUtils(page);
 
         new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .addItemToCartByIndex(FIRST_ITEM)
                 .clickShoppingCart()
                 .clickCheckout()
-                .enterFirstName(firstName)
-                .enterLastName(lastName)
+                .enterFirstName(user.getFirstName())
+                .enterLastName(user.getLastName())
                 .clickContinueButton();
 
         String actualErrorMessage = page
@@ -177,7 +168,7 @@ public class CheckoutStepOneTest extends BaseTest {
 
         assertThat(actualErrorMessage)
                 .as("Error message for empty Postal Code")
-                .isEqualTo(expectedErrorMessage);
+                .isEqualTo(EXPECTED_ERROR_MESSAGE);
 
         appStateUtils.resetStateAndLogout();
     }
@@ -190,7 +181,7 @@ public class CheckoutStepOneTest extends BaseTest {
 
         CheckoutStepOnePage checkoutStepOnePage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .addItemToCartByIndex(FIRST_ITEM)
                 .clickShoppingCart()
                 .clickCheckout();

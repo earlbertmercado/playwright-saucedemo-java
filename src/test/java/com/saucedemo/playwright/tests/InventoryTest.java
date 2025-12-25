@@ -1,4 +1,4 @@
-package com.saucedemo.playwright;
+package com.saucedemo.playwright.tests;
 
 import com.saucedemo.playwright.base.BaseTest;
 import com.saucedemo.playwright.constants.AppConstants;
@@ -21,7 +21,7 @@ public class InventoryTest extends BaseTest {
 
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce");
+                .login(user.getUsername(), user.getPassword());
 
         assertThat(inventoryPage.getPage().url())
                 .as("Inventory page URL")
@@ -61,7 +61,7 @@ public class InventoryTest extends BaseTest {
 
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .sortByNameAsc();
 
         assertThat(inventoryPage.isSortedAlphabeticallyAsc())
@@ -77,7 +77,7 @@ public class InventoryTest extends BaseTest {
 
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .sortByNameDesc();
 
         assertThat(inventoryPage.isSortedAlphabeticallyDesc())
@@ -93,7 +93,7 @@ public class InventoryTest extends BaseTest {
 
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .sortByPriceAsc();
 
         assertThat(inventoryPage.isSortedByPriceAsc())
@@ -109,7 +109,7 @@ public class InventoryTest extends BaseTest {
 
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .sortByPriceDesc();
 
         assertThat(inventoryPage.isSortedByPriceDesc())
@@ -125,7 +125,7 @@ public class InventoryTest extends BaseTest {
 
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce");
+                .login(user.getUsername(), user.getPassword());
 
         assertThat(inventoryPage.areAllItemsValid())
                 .as("All inventory items have valid details")
@@ -145,7 +145,7 @@ public class InventoryTest extends BaseTest {
 
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .addItemToCartByIndex(FIRST_ITEM)
                 .addItemToCartByIndex(SECOND_ITEM)
                 .addItemToCartByIndex(THIRD_ITEM);
@@ -167,7 +167,7 @@ public class InventoryTest extends BaseTest {
 
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .addItemToCartByIndex(FIRST_ITEM)
                 .addItemToCartByIndex(SECOND_ITEM)
                 .addItemToCartByIndex(THIRD_ITEM)
@@ -194,7 +194,7 @@ public class InventoryTest extends BaseTest {
 
         ItemDetailPage itemDetailPage = new LoginPage(page)
                 .navigate()
-                .login("standard_user", "secret_sauce")
+                .login(user.getUsername(), user.getPassword())
                 .clickItemNameByIndex(FIRST_ITEM);
 
         assertThat(itemDetailPage.isRedirectedToItemDetailPage())
