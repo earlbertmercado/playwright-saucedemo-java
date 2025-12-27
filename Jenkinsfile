@@ -11,76 +11,80 @@ pipeline {
     }
 
     parameters {
-
         choice(
             name: 'BROWSER',
-            choices: [
-                'CHROME',
-                'CHROMIUM',
-                'EDGE',
-                'FIREFOX',
-                'WEBKIT'
-            ],
+            choices: ['CHROME','CHROMIUM','EDGE','FIREFOX','WEBKIT'],
             description: 'Select browser to run tests'
         )
 
         choice(
             name: 'HEADLESS',
-            choices: [
-                'true',
-                'false'
-            ],
+            choices: ['true','false'],
             description: 'Enable or disable headless execution'
         )
 
-        choice(
-            name: 'TEST_CLASS',
-            choices: [
-                'All Tests',
-                'CartTest',
-                'CheckoutCompleteTest',
-                'CheckoutStepOneTest',
-                'CheckoutStepTwoTest',
-                'FooterComponentTest',
-                'HeaderComponentTest',
-                'InventoryTest',
-                'ItemDetailTest',
-                'LoginTest'
-            ],
-            description: 'Select which test class to execute'
-        )
+         choice(
+             name: 'TEST_CLASS',
+             choices: [
+                 'All Tests',
+                 'CartTest',
+                 'CheckoutCompleteTest',
+                 'CheckoutStepOneTest',
+                 'CheckoutStepTwoTest',
+                 'FooterComponentTest',
+                 'HeaderComponentTest',
+                 'InventoryTest',
+                 'ItemDetailTest',
+                 'LoginTest'
+             ],
+             description: 'Select which test class to execute'
+         )
     }
 
-stage('Install Dependencies / Build') {
-    steps {
-        script {
-            if (isUnix()) {
-                sh "mvn clean install"
-            } else {
-                bat "mvn clean install"
+    stages {
+        stage('Install Dependencies / Build') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        sh "mvn clean install"
+                    } else {
+                        bat "mvn clean install"
+                    }
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                script {
+                    def mvnCmd = "mvn clean test -Dbrowser=${params.BROWSER} -DisHeadless=${params.HEADLESS}"
+                    if (params.TEST_CLASS != 'All Tests') {
+                        mvnCmd = "${mvnCmd} -Dtest=${params.TEST_CLASS}"
+                    }
+
+                    if (isUnix()) {
+                        sh mvnCmd
+                    } else {
+                        bat mvnCmd
+                    }
+                }
+            }
+        }
+
+        stage('Send Test Report via Email') {
+            steps {
+                script {
+                    // Adjust recipients and report path
+                    def reportPath = "${WORKSPACE}/reports/extent-report.html"
+                    mail to: 'earlbertmercado@gmail.com',
+                         subject: "Saucedemo Playwright Test Report - ${currentBuild.currentResult}",
+                         body: "The test execution is complete. Please find the report attached.",
+                         attachLog: false,
+                         attachmentsPattern: reportPath
+                }
             }
         }
     }
-}
-
-stage('Run Tests') {
-    steps {
-        script {
-            def mvnCmd = "mvn clean test -Dbrowser=${params.BROWSER} -DisHeadless=${params.HEADLESS}"
-
-            if (params.TEST_CLASS != 'All Tests') {
-                mvnCmd = "${mvnCmd} -Dtest=${params.TEST_CLASS}"
-            }
-
-            if (isUnix()) {
-                sh mvnCmd
-            } else {
-                bat mvnCmd
-            }
-        }
-    }
-}
-
 
     post {
         success {
