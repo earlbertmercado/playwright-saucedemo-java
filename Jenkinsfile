@@ -51,33 +51,36 @@ pipeline {
         )
     }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
-        stage('Install Dependencies / Build') {
-            steps {
+stage('Install Dependencies / Build') {
+    steps {
+        script {
+            if (isUnix()) {
+                sh "mvn clean install"
+            } else {
                 bat "mvn clean install"
             }
         }
+    }
+}
 
-        stage('Run Tests') {
-            steps {
-                script {
-                    def mvnCmd = "mvn clean test -Dbrowser=${params.BROWSER} -DisHeadless=${params.HEADLESS}"
+stage('Run Tests') {
+    steps {
+        script {
+            def mvnCmd = "mvn clean test -Dbrowser=${params.BROWSER} -DisHeadless=${params.HEADLESS}"
 
-                    if (params.TEST_CLASS != 'All Tests') {
-                        mvnCmd = "${mvnCmd} -Dtest=${params.TEST_CLASS}"
-                    }
+            if (params.TEST_CLASS != 'All Tests') {
+                mvnCmd = "${mvnCmd} -Dtest=${params.TEST_CLASS}"
+            }
 
-                    bat mvnCmd
-                }
+            if (isUnix()) {
+                sh mvnCmd
+            } else {
+                bat mvnCmd
             }
         }
     }
+}
+
 
     post {
         success {
