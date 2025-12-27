@@ -71,20 +71,24 @@ pipeline {
             }
         }
 
-        stage('Send Test Report via Email') {
-            steps {
-                script {
-                    // Adjust recipients and report path
-                    def reportPath = "${WORKSPACE}/reports/extent-report.html"
-                    mail to: 'earlbertmercado@gmail.com',
-                         subject: "Saucedemo Playwright Test Report - ${currentBuild.currentResult}",
-                         body: "The test execution is complete. Please find the report attached.",
-                         attachLog: false,
-                         attachmentsPattern: reportPath
-                }
-            }
-        }
-    }
+ stage('Send Test Report via Email') {
+     steps {
+         script {
+             // Use a relative path and a glob pattern
+             def reportFile = "reports/extent-report.html"
+
+             // Check if report exists
+             if (fileExists(reportFile)) {
+                 mail to: 'earlbertmercado@gmail.com',
+                      subject: "Saucedemo Playwright Test Report - ${currentBuild.currentResult}",
+                      body: "The test execution is complete. Please find the report attached.",
+                      attachmentsPattern: reportFile
+             } else {
+                 echo "Report file not found: ${reportFile}"
+             }
+         }
+     }
+ }
 
     post {
         success {
