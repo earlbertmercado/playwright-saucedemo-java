@@ -74,7 +74,8 @@ pipeline {
         stage('Send Test Report via Email') {
             steps {
                 script {
-                    def reportFile = "reports/extent-report.html"
+                    def reportFile = "${WORKSPACE}\\reports\\extent-report.html"
+                    echo "Preparing to send email with report: ${reportFile}"
 
                     if (fileExists(reportFile)) {
                         mail to: 'earlbertmercado@gmail.com',
