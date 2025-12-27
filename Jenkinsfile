@@ -2,12 +2,32 @@ pipeline {
     agent any
 
     tools {
-        jdk 'JDK21'          // Configure this name in Jenkins Global Tool Config
-        maven 'Maven3'       // Configure this name in Jenkins Global Tool Config
+        jdk 'JDK21'
+        maven 'Maven3'
     }
 
     options {
         timestamps()
+    }
+
+    parameters {
+        // Add whatever test classes you want as options
+        choice(
+            name: 'TEST_CLASS',
+            choices: [
+                'All Tests',
+                'CartTest',
+                'CheckoutCompleteTest',
+                'CheckoutStepOneTest',
+                'CheckoutStepTwoTest',
+                'FooterComponentTest',
+                'HeaderComponentTest',
+                'InventoryTest',
+                'ItemDetailTest',
+                'LoginTest'
+            ],
+            description: 'Select which test class to execute'
+        )
     }
 
     stages {
@@ -25,23 +45,18 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                // Playwright Java installs browsers automatically on first run
-                // If using Linux agent w/o GUI, Playwright uses headless by default
-                bat "mvn clean test"
+                script {
+                    if (params.TEST_CLASS == 'All Tests') {
+                        bat "mvn clean test"
+                    } else {
+                        bat "mvn clean test -Dtest=${params.TEST_CLASS}"
+                    }
+                }
             }
         }
-
-//         stage('Archive Test Reports') {
-//             steps {
-//                 junit 'target/surefire-reports/*.xml'
-//             }
-//         }
     }
 
     post {
-//         always {
-//             archiveArtifacts artifacts: 'target/**/*.log', allowEmptyArchive: true
-//         }
         success {
             echo 'Tests executed successfully'
         }
