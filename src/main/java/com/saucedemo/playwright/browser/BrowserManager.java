@@ -37,13 +37,20 @@ public class BrowserManager {
 
     // Initialize Playwright browser, context, and page based on properties
     public Page initializeBrowser(Properties props) {
-        String browserNameRaw = props.getProperty("browser", "CHROMIUM");
-        boolean headless = Boolean.parseBoolean(props.getProperty("isHeadless", "false"));
+
+        // Get browser and headless settings:
+        // 1. Check if overridden via Maven -D parameters (e.g., -Dbrowser=EDGE -DisHeadless=true)
+        // 2. If not provided, fallback to config.properties values
+        // 3. If still not set, use defaults: CHROMIUM for browser, false for headless
+        String browserName = System.getProperty("browser",
+                props.getProperty("browser", "CHROMIUM"));
+        boolean headless = Boolean.parseBoolean(System.getProperty("isHeadless",
+                props.getProperty("isHeadless", "false")));
 
         Integer width = parseDimension(props.getProperty("browserWidth"), "width");
         Integer height = parseDimension(props.getProperty("browserHeight"), "height");
 
-        BrowserTypes browserType = BrowserTypes.fromString(browserNameRaw);
+        BrowserTypes browserType = BrowserTypes.fromString(browserName);
         logger.info("Starting {} browser with {} mode", browserType, headless ? "headless" : "headed");
 
         // Create Playwright instance for this thread
