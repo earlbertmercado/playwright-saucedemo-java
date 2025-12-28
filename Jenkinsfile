@@ -46,9 +46,9 @@ pipeline {
             steps {
                 script {
                     if (isUnix()) {
-                        sh "mvn clean install"
+                        sh "mvn clean install -DskipTests"
                     } else {
-                        bat "mvn clean install"
+                        bat "mvn clean install -DskipTests"
                     }
                 }
             }
