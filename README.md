@@ -36,7 +36,7 @@ A High Level Diagram of this framework is shown below.
 saucedemo-playwright-java/
 ├── src/
 │   ├── main/
-│   │   ├── java/com/saucedemo/playwright/
+│   │   ├── java/com/earlbertmercado/playwright/saucedemo/
 │   │   │   ├── base/			# Base Page class
 │   │   │   ├── browser/		# Browser Manager/Factory logic
 │   │   │   ├── constants/		# App constants and string locators
@@ -45,7 +45,7 @@ saucedemo-playwright-java/
 │   │   │   └── utils/			# Config reader, Screenshot utils, etc.
 │   │   └── resources/			# Global properties and Log4j2 config
 │   └── test/
-│       ├── java/com/saucedemo/playwright/
+│       ├── java/com/earlbertmercado/playwright/saucedemo/
 │       │   ├── base/			# Base Test class (Setup/Teardown)
 │       │   ├── dataprovider/   # Test data providers
 │       │   └── tests/			# Functional test classes
@@ -69,7 +69,7 @@ saucedemo-playwright-java/
 - Fork or download this repository
 - Clone the repository and navigate to the project directory:
    ```shell
-    $ https://github.com/[your_username]/saucedemo-playwright-java.git
+    $ https://github.com/[your_username]/playwright-saucedemo-automation.git
     $ cd saucedemo-playwright-java
    ```
 
