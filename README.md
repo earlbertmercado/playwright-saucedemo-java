@@ -1,12 +1,11 @@
 # Overview
-This project implements a scalable and maintainable automated end-to-end testing framework for the
+This project implements a scalable and maintainable automated testing framework for the
 Sauce Demo e-commerce site using Playwright with Java, following the Page Object Model (POM) design pattern.
 It simulates typical user journeys such as logging in, browsing products, adding items to the cart, and
 completing checkout. The framework is built for maintainability and reliability, providing detailed test
 reports and efficient browser management.
 
 ## Key Features
-- Automated end-to-end testing of Sauce Demo e-commerce site.
 - Built using **Java**, **Playwright**, **TestNG**, and **Maven**.
 - Implements **Page Object Model (POM)** design pattern for maintainable and readable code.
 - Supports **remote execution** via Selenium Grid and **parallel testing**.
