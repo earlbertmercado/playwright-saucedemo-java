@@ -1,3 +1,5 @@
+![playwright_logo](assets/playwright_logo.png)
+
 # Overview
 This project implements a scalable and maintainable automated testing framework for the
 Sauce Demo e-commerce site using Playwright with Java, following the Page Object Model (POM) design pattern.
