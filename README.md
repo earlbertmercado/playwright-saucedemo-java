@@ -35,6 +35,9 @@ A High Level Diagram of this framework is shown below.
 ## Folder Structure
 ```
 saucedemo-playwright-java/
+├── assets/	                    # README images
+├── logs/                       # Generated Log4j2 log files from test executions
+├── reports/                    # Test execution reports (ExtentReports output)
 ├── src/
 │   ├── main/
 │   │   ├── java/com/earlbertmercado/playwright/saucedemo/
@@ -51,7 +54,6 @@ saucedemo-playwright-java/
 │       │   ├── dataprovider/   # Test data providers
 │       │   └── tests/			# Functional test classes
 │       └── resources/			# Test runners (testng.xml) and test data
-├── assets/	                    # README images
 ├── Jenkinsfile                 # CI/CD pipeline definition
 ├── docker-compose.yaml         # Selenium Grid infrastructure
 └── pom.xml                     # Project dependencies and build config
