@@ -5,11 +5,8 @@ import com.earlbertmercado.playwright.saucedemo.constants.AppConstants;
 import com.earlbertmercado.playwright.saucedemo.constants.HeaderLocators;
 import com.earlbertmercado.playwright.saucedemo.constants.InventoryPageLocators;
 import com.earlbertmercado.playwright.saucedemo.constants.ItemDetailPageLocators;
-import com.earlbertmercado.playwright.saucedemo.pages.InventoryPage;
 import com.earlbertmercado.playwright.saucedemo.pages.ItemDetailPage;
-import com.earlbertmercado.playwright.saucedemo.pages.LoginPage;
 import org.assertj.core.api.Assertions;
-import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,9 +17,7 @@ public class ItemDetailTest extends BaseTest {
     public void testItemDetailPageLoad() {
         int FIRST_ITEM = 0;
 
-        SoftAssertions softly = new SoftAssertions();
-
-        ItemDetailPage itemDetailPage = new LoginPage(page)
+        ItemDetailPage itemDetailPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .clickItemNameByIndex(FIRST_ITEM);
@@ -60,9 +55,7 @@ public class ItemDetailTest extends BaseTest {
         int FIRST_ITEM = 0;
         String EXPECTED_CART_BADGE_DISPLAYED_NUMBER = "1";
 
-        SoftAssertions softly = new SoftAssertions();
-
-        ItemDetailPage itemDetailPage = new LoginPage(page)
+        ItemDetailPage itemDetailPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .clickItemNameByIndex(FIRST_ITEM);
@@ -101,7 +94,7 @@ public class ItemDetailTest extends BaseTest {
     public void testBackToProductsButton() {
         int FIRST_ITEM = 0;
 
-        InventoryPage inventoryPage = new LoginPage(page)
+        loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .clickItemNameByIndex(FIRST_ITEM)
@@ -117,9 +110,7 @@ public class ItemDetailTest extends BaseTest {
         int FLEE_JACKET_ID = 5;
         double EXPECTED_PRICE = 49.99;
 
-        SoftAssertions softly = new SoftAssertions();
-
-        ItemDetailPage itemDetailPage = new LoginPage(page)
+        ItemDetailPage itemDetailPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .clickSpecificItem(InventoryPageLocators.FLEE_JACKET);
@@ -158,7 +149,7 @@ public class ItemDetailTest extends BaseTest {
     public void testItemPriceNotZero() {
         int FIRST_ITEM = 0;
 
-        ItemDetailPage itemDetailPage = new LoginPage(page)
+        ItemDetailPage itemDetailPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .clickItemNameByIndex(FIRST_ITEM);

@@ -3,11 +3,7 @@ package com.earlbertmercado.playwright.saucedemo.tests;
 import com.earlbertmercado.playwright.saucedemo.base.BaseTest;
 import com.earlbertmercado.playwright.saucedemo.constants.AppConstants;
 import com.earlbertmercado.playwright.saucedemo.pages.CartPage;
-import com.earlbertmercado.playwright.saucedemo.pages.components.HeaderComponent;
 import com.earlbertmercado.playwright.saucedemo.pages.InventoryPage;
-import com.earlbertmercado.playwright.saucedemo.pages.LoginPage;
-import com.earlbertmercado.playwright.saucedemo.utils.AppStateUtils;
-import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,10 +14,7 @@ public class CartTest extends BaseTest {
     public void testCartPageLoad() {
         int FIRST_ITEM = 0;
 
-        SoftAssertions softly = new SoftAssertions();
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
-        CartPage cartPage = new LoginPage(page)
+        CartPage cartPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .addItemsToCart(FIRST_ITEM)
@@ -60,10 +53,7 @@ public class CartTest extends BaseTest {
     public void testAddOneItemToCart() {
         int FIRST_ITEM = 0;
 
-        SoftAssertions softly = new SoftAssertions();
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
-        CartPage cartPage = new LoginPage(page)
+        CartPage cartPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .addItemsToCart(FIRST_ITEM)
@@ -88,10 +78,7 @@ public class CartTest extends BaseTest {
         int THIRD_ITEM = 2;
         int EXPECTED_TOTAL_QUANTITY = 3;
 
-        SoftAssertions softly = new SoftAssertions();
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
-        CartPage cartPage = new LoginPage(page)
+        CartPage cartPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .addItemsToCart(FIRST_ITEM, SECOND_ITEM, THIRD_ITEM)
@@ -114,10 +101,7 @@ public class CartTest extends BaseTest {
     public void testRemoveItemFromCart() {
         int FIRST_ITEM = 0;
 
-        SoftAssertions softly = new SoftAssertions();
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
-        CartPage cartPage = new LoginPage(page)
+        CartPage cartPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .addItemsToCart(FIRST_ITEM)
@@ -143,10 +127,7 @@ public class CartTest extends BaseTest {
     public void testContinueShoppingButton() {
         int FIRST_ITEM = 0;
 
-        SoftAssertions softly = new SoftAssertions();
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
-        InventoryPage inventoryPage = new LoginPage(page)
+        InventoryPage inventoryPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .addItemsToCart(FIRST_ITEM)
@@ -167,11 +148,8 @@ public class CartTest extends BaseTest {
 
     @Test
     public void testEmptyCart() {
-        SoftAssertions softly = new SoftAssertions();
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-        HeaderComponent header = new HeaderComponent(page);
 
-        CartPage cartPage = new LoginPage(page)
+        CartPage cartPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .clickShoppingCart();

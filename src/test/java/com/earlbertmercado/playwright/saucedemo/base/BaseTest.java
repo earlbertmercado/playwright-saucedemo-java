@@ -3,10 +3,16 @@ package com.earlbertmercado.playwright.saucedemo.base;
 import com.earlbertmercado.playwright.saucedemo.browser.BrowserManager;
 import com.earlbertmercado.playwright.saucedemo.dataprovider.TestDataLoader;
 import com.earlbertmercado.playwright.saucedemo.dataprovider.TestDataUsers;
+import com.earlbertmercado.playwright.saucedemo.pages.InventoryPage;
+import com.earlbertmercado.playwright.saucedemo.pages.LoginPage;
+import com.earlbertmercado.playwright.saucedemo.pages.components.FooterComponent;
+import com.earlbertmercado.playwright.saucedemo.pages.components.HeaderComponent;
+import com.earlbertmercado.playwright.saucedemo.utils.AppStateUtils;
 import com.earlbertmercado.playwright.saucedemo.utils.InitializeProperties;
 import com.microsoft.playwright.Page;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -21,6 +27,13 @@ public abstract class BaseTest {
     protected Page page;
     protected Properties properties;
     protected TestDataUsers user;
+    protected AppStateUtils appStateUtils;
+    protected SoftAssertions softly;
+
+    protected HeaderComponent header;
+    protected FooterComponent footer;
+    protected LoginPage loginPage;
+    protected InventoryPage inventoryPage;
 
     //  Initializes BrowserManager, loads properties, and launches the browser before any tests.
     @BeforeClass
@@ -37,15 +50,21 @@ public abstract class BaseTest {
         logger.info("Browser launched successfully.");
     }
 
-    // Loads the user test data before each test method
     @BeforeMethod
-    public void loadTestUser() {
+    public void setupTestContext() {
+        // Load User Data
         String userKey = System.getProperty("user", "standard_user");
         user = TestDataLoader.getUser(userKey);
-        if (user == null) {
-            throw new RuntimeException("Test user not found: " + userKey);
-        }
-        logger.info("Loaded user test data: {}", userKey);
+
+        // Initialize Utilities
+        this.appStateUtils = new AppStateUtils(page);
+        this.softly = new SoftAssertions();
+        this.header = new HeaderComponent(page);
+        this.footer = new FooterComponent(page);
+        this.loginPage = new LoginPage(page);
+        this.inventoryPage = new InventoryPage(page);
+
+        logger.info("Test context initialized for user: {}", userKey);
     }
 
     //  Closes the browser and cleans up resources after all tests in the class have executed.

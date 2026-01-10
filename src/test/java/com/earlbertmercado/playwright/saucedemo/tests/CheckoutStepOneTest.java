@@ -5,9 +5,6 @@ import com.earlbertmercado.playwright.saucedemo.constants.AppConstants;
 import com.earlbertmercado.playwright.saucedemo.constants.CheckoutStepOnePageLocators;
 import com.earlbertmercado.playwright.saucedemo.pages.CheckoutStepOnePage;
 import com.earlbertmercado.playwright.saucedemo.pages.CheckoutStepTwoPage;
-import com.earlbertmercado.playwright.saucedemo.pages.LoginPage;
-import com.earlbertmercado.playwright.saucedemo.utils.AppStateUtils;
-import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,10 +15,7 @@ public class CheckoutStepOneTest extends BaseTest {
     public void testCheckoutStepOnePageLoad() {
         int FIRST_ITEM = 0;
 
-        SoftAssertions softly = new SoftAssertions();
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
-        CheckoutStepOnePage checkoutStepOnePage = new LoginPage(page)
+        CheckoutStepOnePage checkoutStepOnePage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .addItemsToCart(FIRST_ITEM)
@@ -65,10 +59,7 @@ public class CheckoutStepOneTest extends BaseTest {
     public void testCheckoutStepOneFormSubmission() {
         int FIRST_ITEM = 0;
 
-        SoftAssertions softly = new SoftAssertions();
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
-        CheckoutStepTwoPage checkoutStepTwoPage = new LoginPage(page)
+        CheckoutStepTwoPage checkoutStepTwoPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .addItemsToCart(FIRST_ITEM)
@@ -96,10 +87,8 @@ public class CheckoutStepOneTest extends BaseTest {
         int FIRST_ITEM = 0;
         String EXPECTED_ERROR_MESSAGE = "Error: First Name is required";
 
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
         logger.debug("Submitting checkout form with missing First Name...");
-        new LoginPage(page)
+        loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .addItemsToCart(FIRST_ITEM)
@@ -127,10 +116,8 @@ public class CheckoutStepOneTest extends BaseTest {
         int FIRST_ITEM = 0;
         String EXPECTED_ERROR_MESSAGE = "Error: Last Name is required";
 
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
         logger.debug("Submitting checkout form with missing Last Name...");
-        new LoginPage(page)
+        loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .addItemsToCart(FIRST_ITEM)
@@ -158,10 +145,8 @@ public class CheckoutStepOneTest extends BaseTest {
         int FIRST_ITEM = 0;
         String EXPECTED_ERROR_MESSAGE = "Error: Postal Code is required";
 
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
         logger.debug("Submitting checkout form with missing postal code...");
-        new LoginPage(page)
+        loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .addItemsToCart(FIRST_ITEM)
@@ -188,9 +173,7 @@ public class CheckoutStepOneTest extends BaseTest {
     public void testCancelButtonNavigatesToCartPage() {
         int FIRST_ITEM = 0;
 
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
-        CheckoutStepOnePage checkoutStepOnePage = new LoginPage(page)
+        CheckoutStepOnePage checkoutStepOnePage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .addItemsToCart(FIRST_ITEM)

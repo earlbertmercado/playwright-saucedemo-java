@@ -4,9 +4,6 @@ import com.earlbertmercado.playwright.saucedemo.base.BaseTest;
 import com.earlbertmercado.playwright.saucedemo.constants.AppConstants;
 import com.earlbertmercado.playwright.saucedemo.pages.CheckoutCompletePage;
 import com.earlbertmercado.playwright.saucedemo.pages.InventoryPage;
-import com.earlbertmercado.playwright.saucedemo.pages.LoginPage;
-import com.earlbertmercado.playwright.saucedemo.utils.AppStateUtils;
-import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,11 +14,8 @@ public class CheckoutCompleteTest extends BaseTest {
     public void testCheckoutCompletePageLoad() {
         int FIRST_ITEM = 0;
 
-        SoftAssertions softly = new SoftAssertions();
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
         logger.info("Executing full checkout flow for item index: {}", FIRST_ITEM);
-        CheckoutCompletePage checkoutCompletePage = new LoginPage(page)
+        CheckoutCompletePage checkoutCompletePage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .addItemsToCart(FIRST_ITEM)
@@ -64,10 +58,8 @@ public class CheckoutCompleteTest extends BaseTest {
     public void testBackHomeButton() {
         int FIRST_ITEM = 0;
 
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
         logger.debug("Navigating through checkout to reach the Back Home button...");
-        InventoryPage inventoryPage = new LoginPage(page)
+        InventoryPage inventoryPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .addItemsToCart(FIRST_ITEM)

@@ -3,13 +3,9 @@ package com.earlbertmercado.playwright.saucedemo.tests;
 import com.earlbertmercado.playwright.saucedemo.base.BaseTest;
 import com.earlbertmercado.playwright.saucedemo.constants.AppConstants;
 import com.earlbertmercado.playwright.saucedemo.pages.CartPage;
-import com.earlbertmercado.playwright.saucedemo.pages.components.HeaderComponent;
 import com.earlbertmercado.playwright.saucedemo.pages.InventoryPage;
-import com.earlbertmercado.playwright.saucedemo.pages.ItemDetailPage;
 import com.earlbertmercado.playwright.saucedemo.pages.LoginPage;
-import com.earlbertmercado.playwright.saucedemo.utils.AppStateUtils;
 import org.assertj.core.api.Assertions;
-import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -20,11 +16,7 @@ public class HeaderComponentTest extends BaseTest {
     public void testBurgerMenuAllItemsLink() {
         int FIRST_ITEM = 0;
 
-        SoftAssertions softly = new SoftAssertions();
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-        HeaderComponent header = new HeaderComponent(page);
-
-        ItemDetailPage itemDetailPage = new LoginPage(page)
+        loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .clickItemNameByIndex(FIRST_ITEM);
@@ -45,10 +37,8 @@ public class HeaderComponentTest extends BaseTest {
 
     @Test
     public void testBurgerMenuAboutLink() {
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-        HeaderComponent header = new HeaderComponent(page);
 
-        InventoryPage inventoryPage = new LoginPage(page)
+        InventoryPage inventoryPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword());
 
@@ -64,9 +54,7 @@ public class HeaderComponentTest extends BaseTest {
 
     @Test
     public void testBurgerMenuLogoutLink() {
-        HeaderComponent header = new HeaderComponent(page);
-
-        InventoryPage inventoryPage = new LoginPage(page)
+        loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword());
 
@@ -87,11 +75,7 @@ public class HeaderComponentTest extends BaseTest {
     public void testResetAppStateLink() {
         int FIRST_ITEM = 0;
 
-        SoftAssertions softly = new SoftAssertions();
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-        HeaderComponent header = new HeaderComponent(page);
-
-        InventoryPage inventoryPage = new LoginPage(page)
+        InventoryPage inventoryPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .addItemsToCart(FIRST_ITEM);
@@ -128,11 +112,8 @@ public class HeaderComponentTest extends BaseTest {
         int SECOND_ITEM = 1;
         int THIRD_ITEM = 2;
 
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-        HeaderComponent header = new HeaderComponent(page);
-
         logger.info("Adding 3 items to cart to establish baseline count.");
-        CartPage cartPage = new LoginPage(page)
+        CartPage cartPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .addItemsToCart(FIRST_ITEM, SECOND_ITEM, THIRD_ITEM)

@@ -1,12 +1,7 @@
 package com.earlbertmercado.playwright.saucedemo.tests;
 
 import com.earlbertmercado.playwright.saucedemo.base.BaseTest;
-import com.earlbertmercado.playwright.saucedemo.pages.components.FooterComponent;
-import com.earlbertmercado.playwright.saucedemo.pages.InventoryPage;
-import com.earlbertmercado.playwright.saucedemo.pages.LoginPage;
-import com.earlbertmercado.playwright.saucedemo.utils.AppStateUtils;
 import com.microsoft.playwright.Page;
-import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,13 +10,8 @@ public class FooterComponentTest extends BaseTest {
 
     @Test
     public void testFooterLinksVisibility() {
-        SoftAssertions softly = new SoftAssertions();
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-        FooterComponent footer = new FooterComponent(page);
 
-        InventoryPage inventoryPage = new LoginPage(page)
-                .navigate()
-                .login(user.getUsername(), user.getPassword());
+        loginPage.navigate().login(user.getUsername(), user.getPassword());
 
         logger.info("Verifying all social media links and copyright visibility.");
 
@@ -53,12 +43,7 @@ public class FooterComponentTest extends BaseTest {
         String EXPECTED_FACEBOOK_URL = "https://www.facebook.com/saucelabs";
         String EXPECTED_LINKEDIN_URL = "https://www.linkedin.com/company/sauce-labs/";
 
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-        FooterComponent footer = new FooterComponent(page);
-
-        InventoryPage inventoryPage = new LoginPage(page)
-                .navigate()
-                .login(user.getUsername(), user.getPassword());
+        loginPage.navigate().login(user.getUsername(), user.getPassword());
 
         logger.info("Verifying all social media links");
 

@@ -5,9 +5,6 @@ import com.earlbertmercado.playwright.saucedemo.constants.AppConstants;
 import com.earlbertmercado.playwright.saucedemo.constants.HeaderLocators;
 import com.earlbertmercado.playwright.saucedemo.pages.InventoryPage;
 import com.earlbertmercado.playwright.saucedemo.pages.ItemDetailPage;
-import com.earlbertmercado.playwright.saucedemo.pages.LoginPage;
-import com.earlbertmercado.playwright.saucedemo.utils.AppStateUtils;
-import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,10 +13,7 @@ public class InventoryTest extends BaseTest {
 
     @Test
     public void testInventoryPageLoad() {
-        SoftAssertions softly = new SoftAssertions();
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
-        InventoryPage inventoryPage = new LoginPage(page)
+        InventoryPage inventoryPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword());
 
@@ -58,9 +52,7 @@ public class InventoryTest extends BaseTest {
 
     @Test
     public void testInventorySortingByNameAsc() {
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
-        InventoryPage inventoryPage = new LoginPage(page)
+        InventoryPage inventoryPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .sortByNameAsc();
@@ -75,9 +67,7 @@ public class InventoryTest extends BaseTest {
 
     @Test
     public void testInventorySortingByNameDesc() {
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
-        InventoryPage inventoryPage = new LoginPage(page)
+        InventoryPage inventoryPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .sortByNameDesc();
@@ -92,9 +82,7 @@ public class InventoryTest extends BaseTest {
 
     @Test
     public void testInventorySortingByPriceAsc() {
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
-        InventoryPage inventoryPage = new LoginPage(page)
+        InventoryPage inventoryPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .sortByPriceAsc();
@@ -109,9 +97,7 @@ public class InventoryTest extends BaseTest {
 
     @Test
     public void testInventorySortingByPriceDesc() {
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
-        InventoryPage inventoryPage = new LoginPage(page)
+        InventoryPage inventoryPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .sortByPriceDesc();
@@ -126,9 +112,7 @@ public class InventoryTest extends BaseTest {
 
     @Test
     public void testEachItemDetails() {
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
-        InventoryPage inventoryPage = new LoginPage(page)
+        InventoryPage inventoryPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword());
 
@@ -146,9 +130,7 @@ public class InventoryTest extends BaseTest {
         int THIRD_ITEM = 2;
         int EXPECTED_CART_BADGE_COUNT = 3;
 
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
-        InventoryPage inventoryPage = new LoginPage(page)
+        InventoryPage inventoryPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .addItemsToCart(FIRST_ITEM, SECOND_ITEM, THIRD_ITEM);
@@ -169,9 +151,7 @@ public class InventoryTest extends BaseTest {
         int SECOND_ITEM = 1;
         int THIRD_ITEM = 2;
 
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
-        InventoryPage inventoryPage = new LoginPage(page)
+        InventoryPage inventoryPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .addThenRemoveItems(FIRST_ITEM, SECOND_ITEM, THIRD_ITEM);
@@ -192,10 +172,7 @@ public class InventoryTest extends BaseTest {
     public void testClickingItemNavigatesToItemDetailPage() {
         int TARGET_INDEX = 0;
 
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-        InventoryPage inventoryPage = new InventoryPage(page);
-
-        ItemDetailPage itemDetailPage = new LoginPage(page)
+        ItemDetailPage itemDetailPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .clickItemNameByIndex(TARGET_INDEX);
