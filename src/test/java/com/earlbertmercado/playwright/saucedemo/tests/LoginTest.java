@@ -3,9 +3,6 @@ package com.earlbertmercado.playwright.saucedemo.tests;
 import com.earlbertmercado.playwright.saucedemo.base.BaseTest;
 import com.earlbertmercado.playwright.saucedemo.constants.AppConstants;
 import com.earlbertmercado.playwright.saucedemo.pages.InventoryPage;
-import com.earlbertmercado.playwright.saucedemo.pages.LoginPage;
-import com.earlbertmercado.playwright.saucedemo.utils.AppStateUtils;
-import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,11 +11,9 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void testLoginPageLoad() {
-        SoftAssertions softly = new SoftAssertions();
 
         logger.debug("Navigating to Login Page...");
-        LoginPage loginPage = new LoginPage(page).navigate();
-
+        loginPage.navigate();
 
         logger.info("Verifying login page URL and UI elements visibility.");
         assertThat(loginPage.getPage().url())
@@ -42,11 +37,9 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void testValidLogin() {
-        SoftAssertions softly = new SoftAssertions();
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
         logger.debug("Performing login sequence...");
-        InventoryPage inventoryPage = new LoginPage(page)
+
+        InventoryPage inventoryPage = loginPage
                 .navigate()
                 .enterUsername(user.getUsername())
                 .enterPassword(user.getPassword())
@@ -81,10 +74,9 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void testInvalidLogin() {
-        SoftAssertions softly = new SoftAssertions();
-
         logger.debug("Attempting login with invalid credentials...");
-        LoginPage loginPage = new LoginPage(page).navigate();
+
+        loginPage.navigate();
 
         loginPage.enterUsername("invalid_username")
                 .enterPassword("invalid_password")

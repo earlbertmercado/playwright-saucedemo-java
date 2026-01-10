@@ -3,9 +3,6 @@ package com.earlbertmercado.playwright.saucedemo.tests;
 import com.earlbertmercado.playwright.saucedemo.base.BaseTest;
 import com.earlbertmercado.playwright.saucedemo.constants.AppConstants;
 import com.earlbertmercado.playwright.saucedemo.pages.CheckoutStepTwoPage;
-import com.earlbertmercado.playwright.saucedemo.pages.LoginPage;
-import com.earlbertmercado.playwright.saucedemo.utils.AppStateUtils;
-import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,10 +13,7 @@ public class CheckoutStepTwoTest extends BaseTest {
     public void testCheckoutStepTwoPageLoad() {
         int FIRST_ITEM = 0;
 
-        SoftAssertions softly = new SoftAssertions();
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
-        CheckoutStepTwoPage checkoutStepTwoPage = new LoginPage(page)
+        CheckoutStepTwoPage checkoutStepTwoPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .addItemsToCart(FIRST_ITEM)
@@ -73,11 +67,8 @@ public class CheckoutStepTwoTest extends BaseTest {
         int SECOND_ITEM = 1;
         int THIRD_ITEM = 2;
 
-        SoftAssertions softly = new SoftAssertions();
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
         logger.debug("Navigating through checkout with multiple items...");
-        CheckoutStepTwoPage checkoutStepTwoPage = new LoginPage(page)
+        CheckoutStepTwoPage checkoutStepTwoPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .addItemsToCart(FIRST_ITEM, SECOND_ITEM, THIRD_ITEM)
@@ -115,9 +106,7 @@ public class CheckoutStepTwoTest extends BaseTest {
     public void testCheckoutStepTwoCancelButton() {
         int FIRST_ITEM = 0;
 
-        AppStateUtils appStateUtils = new AppStateUtils(page);
-
-        CheckoutStepTwoPage checkoutStepTwoPage = new LoginPage(page)
+        CheckoutStepTwoPage checkoutStepTwoPage = loginPage
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
                 .addItemsToCart(FIRST_ITEM)
