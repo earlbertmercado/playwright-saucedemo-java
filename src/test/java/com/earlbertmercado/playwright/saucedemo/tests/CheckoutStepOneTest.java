@@ -13,7 +13,7 @@ public class CheckoutStepOneTest extends BaseTest {
 
     @Test
     public void testCheckoutStepOnePageLoad() {
-        int FIRST_ITEM = 0;
+        final int FIRST_ITEM = 0;
 
         CheckoutStepOnePage checkoutStepOnePage = loginPage
                 .navigate()
@@ -57,7 +57,7 @@ public class CheckoutStepOneTest extends BaseTest {
 
     @Test
     public void testCheckoutStepOneFormSubmission() {
-        int FIRST_ITEM = 0;
+        final int FIRST_ITEM = 0;
 
         CheckoutStepTwoPage checkoutStepTwoPage = loginPage
                 .navigate()
@@ -84,7 +84,7 @@ public class CheckoutStepOneTest extends BaseTest {
 
     @Test
     public void testCheckoutStepOneWithEmptyFirstName() {
-        int FIRST_ITEM = 0;
+        final int FIRST_ITEM = 0;
         String EXPECTED_ERROR_MESSAGE = "Error: First Name is required";
 
         logger.debug("Submitting checkout form with missing First Name...");
@@ -113,7 +113,7 @@ public class CheckoutStepOneTest extends BaseTest {
 
     @Test
     public void testCheckoutStepOneWithEmptyLastName() {
-        int FIRST_ITEM = 0;
+        final int FIRST_ITEM = 0;
         String EXPECTED_ERROR_MESSAGE = "Error: Last Name is required";
 
         logger.debug("Submitting checkout form with missing Last Name...");
@@ -142,8 +142,8 @@ public class CheckoutStepOneTest extends BaseTest {
 
     @Test
     public void testCheckoutStepOneWithEmptyPostalCode() {
-        int FIRST_ITEM = 0;
-        String EXPECTED_ERROR_MESSAGE = "Error: Postal Code is required";
+        final int FIRST_ITEM = 0;
+        final String EXPECTED_ERROR_MESSAGE = "Error: Postal Code is required";
 
         logger.debug("Submitting checkout form with missing postal code...");
         loginPage
@@ -171,7 +171,7 @@ public class CheckoutStepOneTest extends BaseTest {
 
     @Test
     public void testCancelButtonNavigatesToCartPage() {
-        int FIRST_ITEM = 0;
+        final int FIRST_ITEM = 0;
 
         CheckoutStepOnePage checkoutStepOnePage = loginPage
                 .navigate()

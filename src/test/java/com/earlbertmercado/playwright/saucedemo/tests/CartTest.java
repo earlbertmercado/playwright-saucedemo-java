@@ -12,7 +12,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void testCartPageLoad() {
-        int FIRST_ITEM = 0;
+        final int FIRST_ITEM = 0;
 
         CartPage cartPage = loginPage
                 .navigate()
@@ -51,7 +51,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void testAddOneItemToCart() {
-        int FIRST_ITEM = 0;
+        final int FIRST_ITEM = 0;
 
         CartPage cartPage = loginPage
                 .navigate()
@@ -73,10 +73,10 @@ public class CartTest extends BaseTest {
 
     @Test
     public void testAddMultipleItemsToCart() {
-        int FIRST_ITEM = 0;
-        int SECOND_ITEM = 1;
-        int THIRD_ITEM = 2;
-        int EXPECTED_TOTAL_QUANTITY = 3;
+        final int FIRST_ITEM = 0;
+        final int SECOND_ITEM = 1;
+        final int THIRD_ITEM = 2;
+        final int EXPECTED_TOTAL_QUANTITY = 3;
 
         CartPage cartPage = loginPage
                 .navigate()
@@ -99,7 +99,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void testRemoveItemFromCart() {
-        int FIRST_ITEM = 0;
+        final int FIRST_ITEM = 0;
 
         CartPage cartPage = loginPage
                 .navigate()
@@ -125,7 +125,7 @@ public class CartTest extends BaseTest {
 
     @Test
     public void testContinueShoppingButton() {
-        int FIRST_ITEM = 0;
+        final int FIRST_ITEM = 0;
 
         InventoryPage inventoryPage = loginPage
                 .navigate()

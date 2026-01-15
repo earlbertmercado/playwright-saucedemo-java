@@ -12,7 +12,7 @@ public class CheckoutCompleteTest extends BaseTest {
 
     @Test
     public void testCheckoutCompletePageLoad() {
-        int FIRST_ITEM = 0;
+        final int FIRST_ITEM = 0;
 
         logger.info("Executing full checkout flow for item index: {}", FIRST_ITEM);
         CheckoutCompletePage checkoutCompletePage = loginPage
@@ -56,7 +56,7 @@ public class CheckoutCompleteTest extends BaseTest {
 
     @Test
     public void testBackHomeButton() {
-        int FIRST_ITEM = 0;
+        final int FIRST_ITEM = 0;
 
         logger.debug("Navigating through checkout to reach the Back Home button...");
         InventoryPage inventoryPage = loginPage
