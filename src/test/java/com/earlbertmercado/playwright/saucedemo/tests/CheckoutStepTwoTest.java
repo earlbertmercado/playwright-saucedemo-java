@@ -11,7 +11,7 @@ public class CheckoutStepTwoTest extends BaseTest {
 
     @Test
     public void testCheckoutStepTwoPageLoad() {
-        int FIRST_ITEM = 0;
+        final int FIRST_ITEM = 0;
 
         CheckoutStepTwoPage checkoutStepTwoPage = loginPage
                 .navigate()
@@ -63,9 +63,9 @@ public class CheckoutStepTwoTest extends BaseTest {
 
     @Test
     public void testCheckoutStepMultipleItemTotals() {
-        int FIRST_ITEM = 0;
-        int SECOND_ITEM = 1;
-        int THIRD_ITEM = 2;
+        final int FIRST_ITEM = 0;
+        final int SECOND_ITEM = 1;
+        final int THIRD_ITEM = 2;
 
         logger.debug("Navigating through checkout with multiple items...");
         CheckoutStepTwoPage checkoutStepTwoPage = loginPage
@@ -104,7 +104,7 @@ public class CheckoutStepTwoTest extends BaseTest {
 
     @Test
     public void testCheckoutStepTwoCancelButton() {
-        int FIRST_ITEM = 0;
+        final int FIRST_ITEM = 0;
 
         CheckoutStepTwoPage checkoutStepTwoPage = loginPage
                 .navigate()

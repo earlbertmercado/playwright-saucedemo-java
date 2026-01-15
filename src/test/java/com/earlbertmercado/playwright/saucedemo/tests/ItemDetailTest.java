@@ -15,7 +15,7 @@ public class ItemDetailTest extends BaseTest {
 
     @Test
     public void testItemDetailPageLoad() {
-        int FIRST_ITEM = 0;
+        final int FIRST_ITEM = 0;
 
         ItemDetailPage itemDetailPage = loginPage
                 .navigate()
@@ -52,8 +52,8 @@ public class ItemDetailTest extends BaseTest {
 
     @Test
     public void testAddAndRemoveItemToCart() {
-        int FIRST_ITEM = 0;
-        String EXPECTED_CART_BADGE_DISPLAYED_NUMBER = "1";
+        final int FIRST_ITEM = 0;
+        final String EXPECTED_CART_BADGE_DISPLAYED_NUMBER = "1";
 
         ItemDetailPage itemDetailPage = loginPage
                 .navigate()
@@ -92,7 +92,7 @@ public class ItemDetailTest extends BaseTest {
 
     @Test
     public void testBackToProductsButton() {
-        int FIRST_ITEM = 0;
+        final int FIRST_ITEM = 0;
 
         loginPage
                 .navigate()
@@ -107,8 +107,8 @@ public class ItemDetailTest extends BaseTest {
 
     @Test
     public void testSpecificItemDetailPage() {
-        int FLEE_JACKET_ID = 5;
-        double EXPECTED_PRICE = 49.99;
+        final int FLEE_JACKET_ID = 5;
+        final double EXPECTED_PRICE = 49.99;
 
         ItemDetailPage itemDetailPage = loginPage
                 .navigate()
@@ -147,7 +147,7 @@ public class ItemDetailTest extends BaseTest {
 
     @Test
     public void testItemPriceNotZero() {
-        int FIRST_ITEM = 0;
+        final int FIRST_ITEM = 0;
 
         ItemDetailPage itemDetailPage = loginPage
                 .navigate()

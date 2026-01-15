@@ -14,7 +14,7 @@ public class HeaderComponentTest extends BaseTest {
 
     @Test
     public void testBurgerMenuAllItemsLink() {
-        int FIRST_ITEM = 0;
+        final int FIRST_ITEM = 0;
 
         loginPage
                 .navigate()
@@ -73,7 +73,7 @@ public class HeaderComponentTest extends BaseTest {
 
     @Test
     public void testResetAppStateLink() {
-        int FIRST_ITEM = 0;
+        final int FIRST_ITEM = 0;
 
         InventoryPage inventoryPage = loginPage
                 .navigate()
@@ -108,9 +108,9 @@ public class HeaderComponentTest extends BaseTest {
 
     @Test
     public void testCartBadgePersistence() {
-        int FIRST_ITEM = 0;
-        int SECOND_ITEM = 1;
-        int THIRD_ITEM = 2;
+        final int FIRST_ITEM = 0;
+        final int SECOND_ITEM = 1;
+        final int THIRD_ITEM = 2;
 
         logger.info("Adding 3 items to cart to establish baseline count.");
         CartPage cartPage = loginPage

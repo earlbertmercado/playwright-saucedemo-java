@@ -125,10 +125,10 @@ public class InventoryTest extends BaseTest {
 
     @Test
     public void testShoppingCartBadgeAfterAddingItems() {
-        int FIRST_ITEM = 0;
-        int SECOND_ITEM = 1;
-        int THIRD_ITEM = 2;
-        int EXPECTED_CART_BADGE_COUNT = 3;
+        final int FIRST_ITEM = 0;
+        final int SECOND_ITEM = 1;
+        final int THIRD_ITEM = 2;
+        final int EXPECTED_CART_BADGE_COUNT = 3;
 
         InventoryPage inventoryPage = loginPage
                 .navigate()
@@ -147,9 +147,9 @@ public class InventoryTest extends BaseTest {
 
     @Test
     public void testShoppingCartBadgeAfterRemovingItems() {
-        int FIRST_ITEM = 0;
-        int SECOND_ITEM = 1;
-        int THIRD_ITEM = 2;
+        final int FIRST_ITEM = 0;
+        final int SECOND_ITEM = 1;
+        final int THIRD_ITEM = 2;
 
         InventoryPage inventoryPage = loginPage
                 .navigate()
@@ -170,7 +170,7 @@ public class InventoryTest extends BaseTest {
 
     @Test
     public void testClickingItemNavigatesToItemDetailPage() {
-        int TARGET_INDEX = 0;
+        final int TARGET_INDEX = 0;
 
         ItemDetailPage itemDetailPage = loginPage
                 .navigate()

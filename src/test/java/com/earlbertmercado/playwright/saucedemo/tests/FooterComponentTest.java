@@ -39,9 +39,9 @@ public class FooterComponentTest extends BaseTest {
 
     @Test
     public void testFooterLinksNavigation() {
-        String EXPECTED_TWITTER_URL = "https://x.com/saucelabs";
-        String EXPECTED_FACEBOOK_URL = "https://www.facebook.com/saucelabs";
-        String EXPECTED_LINKEDIN_URL = "https://www.linkedin.com/company/sauce-labs/";
+        final String EXPECTED_TWITTER_URL = "https://x.com/saucelabs";
+        final String EXPECTED_FACEBOOK_URL = "https://www.facebook.com/saucelabs";
+        final String EXPECTED_LINKEDIN_URL = "https://www.linkedin.com/company/sauce-labs/";
 
         loginPage.navigate().login(user.getUsername(), user.getPassword());
 
