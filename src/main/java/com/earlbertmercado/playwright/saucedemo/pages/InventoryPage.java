@@ -21,7 +21,7 @@ public class InventoryPage extends BasePage {
     private final Locator itemDescriptions;
     private final Locator itemImages;
     private final Locator addToCartButtons;
-    private final Locator removeButtons;
+    private final Locator removeFromCartButtons;
     private final Locator cartBadge;
 
     public InventoryPage(Page page) {
@@ -36,7 +36,7 @@ public class InventoryPage extends BasePage {
         itemDescriptions    = locator(InventoryPageLocators.ITEM_DESCRIPTIONS);
         itemImages          = locator(InventoryPageLocators.ITEM_IMAGES);
         addToCartButtons    = locator(InventoryPageLocators.ADD_TO_CART_BUTTONS);
-        removeButtons       = locator(InventoryPageLocators.REMOVE_BUTTONS);
+        removeFromCartButtons = locator(InventoryPageLocators.REMOVE_BUTTONS);
         cartBadge           = locator(HeaderLocators.SHOPPING_CART_BADGE);
     }
 
@@ -141,8 +141,8 @@ public class InventoryPage extends BasePage {
 
     public InventoryPage removeItemFromCartByIndex(int index) {
         logger.info("Removing item from cart at index: {}", index);
-        if ("Remove".equals(removeButtons.nth(index).textContent().trim())) {
-            removeButtons.nth(index).click();
+        if ("Remove".equals(removeFromCartButtons.nth(index).textContent().trim())) {
+            removeFromCartButtons.nth(index).click();
         }
         return this;
     }
