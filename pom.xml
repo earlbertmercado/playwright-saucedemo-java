@@ -15,7 +15,7 @@
 
         <playwright.version>1.52.0</playwright.version>
         <testng.version>7.10.2</testng.version>
-        <json.version>20250517</json.version>
+        <json.version>20251224</json.version>
         <log4j.version>2.25.3</log4j.version>
         <extentreports.version>5.1.2</extentreports.version>
         <assertj.version>3.27.3</assertj.version>
